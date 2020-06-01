@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     //
-    pubulic function add()
+    public function add()
     {
       return view('admin.profile.create');
     }
