@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Profile;
+
 class ProfileController extends Controller
 {
     //
@@ -27,4 +29,16 @@ class ProfileController extends Controller
     {
       return redirect('admin/profile/edit');
     }
+
+    public function create(Request $request)
+    {
+
+      $this->validate($request, Profile::$rules);
+
+      $profille = new Profile;
+      $form = $request->all();
+
+      return redirect('admin/profile/create');
+    }
 }
+?>
