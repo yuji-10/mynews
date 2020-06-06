@@ -13,5 +13,9 @@ class Profile extends Model
         'hobby' => 'required',
         'introduction' => 'required',
     );
+
+
+    protected $guarded = ['id'];
+
 }
 ?>
