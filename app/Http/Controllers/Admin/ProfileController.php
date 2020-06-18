@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Profile;
 
-use App\History2;
+use App\History_profiles;
 
 use Carbon\Carbon;
 
@@ -44,10 +44,10 @@ class ProfileController extends Controller
       $profile->fill($profile_form)->save();
 
       // 以下を追記
-        $history2 = new History2;
-        $history2->profile_id = $profile->id;
-        $history2->edited_at = Carbon::now();
-        $history2->save();
+        $history = new History_profiles;
+        $history->profile_id = $profile->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
 
       return redirect('admin/profile/');
     }
