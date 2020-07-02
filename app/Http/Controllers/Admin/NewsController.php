@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 
   use Carbon\Carbon;
 
+  use Storage;
+
   class NewsController extends Controller
   {
 
@@ -30,8 +32,8 @@ use App\Http\Controllers\Controller;
     $form = $request->all();
 
     if (isset($form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $news->image_path = basename($path);
+      $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+      $news->image_path = Storage::disk('s3')->url($path);
       } else {
           $news->image_path = null;
       }
@@ -81,8 +83,8 @@ use App\Http\Controllers\Controller;
       if ($request->input('remove')) {
             $news_form['image_path'] = null;
         } elseif ($request->file('image')) {
-            $path = $request->file('image')->store('public/image');
-            $news_form['image_path'] = basename($path);
+          $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+          $news->image_path = Storage::disk('s3')->url($path);
         } else {
             $news_form['image_path'] = $news->image_path;
         }
